@@ -405,6 +405,61 @@ It is to this layer, the container specific data is written to. This means that
 1. the data in this layer is removed as soon as the container is terminated.
 2. multiple containers of the same image will share the layers that make up the image ( read-only layers ).
 
+## Building a new Docker Image
+You can build a new Docker Image using one of the two approaches:
+1. Commit our change made in a container to create a new docker image
+2. Use a Docker file.
+
+### Approach 1:
+- Take a debian image:                      ```docker run -it debian:stretch```
+- Install git on it:                        ```apt-get update && apt-get install -y git```
+- Get the Container ID:                     ```docker ps -a```
+- Commit the docker container:              ```docker commit 7a72f6b4e077 pdittaka/debian:1.0.0```
+- Spin a new container from this new image: ```docker run -it pdittaka/debian```
+
+### Approach 2:
+Dockerfile is a text document that contains all the instructions that are needed to assemble the image.
+Each image will add a new layer.
+Naming: ```Dockerfile```
+
+```
+FROM debian:stretch
+RUN apt-get update
+RUN apt-get install -y git
+RUN apt-get install -y vim
+```
+
+1. Build context is sent to the Docker Daemon.
+2. Get the debian image of that specific tag.
+3. Docker starts new container and runs the apt-get command.
+4. After commit is done, it removes the container created in step 3.
+5. For the next step, a new container is created based on the new image in step 4 etc.
+6. Basically containers are used as intermediaries in the build of the Image.
+```
+D:\Development\LearnDocker>docker build -t pdittaka/debian .
+[+] Building 42.8s (8/8) FINISHED
+ => [internal] load build definition from Dockerfile                                  0.2s
+ => => transferring dockerfile: 134B                                                  0.0s
+ => [internal] load .dockerignore                                                     0.1s
+ => => transferring context: 2B                                                       0.0s
+ => [internal] load metadata for docker.io/library/debian:stretch                     0.0s
+ => [1/4] FROM docker.io/library/debian:stretch                                       0.1s
+ => => resolve docker.io/library/debian:stretch                                       0.0s
+ => [2/4] RUN apt-get update                                                          7.2s
+ => [3/4] RUN apt-get install -y git                                                 28.9s
+ => [4/4] RUN apt-get install -y vim                                                  5.4s
+ => exporting to image                                                                0.9s
+ => => exporting layers                                                               0.9s
+ => => writing image sha256:9cb49594e31a99842c1ed898eff5dce1f24345b3c57af252bd9025a3  0.0s
+ => => naming to docker.io/pdittaka/debian                                            0.0s
+```
+
+
+
+
+
+
+
 
 
 
