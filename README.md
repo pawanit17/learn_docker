@@ -91,7 +91,7 @@ bin   dev   etc   home  proc  root  sys   tmp   usr   var
 ```
 
 4. It is interesting to note that any file created in one container are not persisted when that container is restarted. This is the foreground mode. Docker
-can also be run in the background mode using the **-d** flag.
+can also be run in the background mode using the **-d** flag. This option stands for **detach mode**.
 ```
 D:\Development\LearnDocker>docker run -d busybox:1.24 sleep 1000
 c492ba8abe689e909e8b4261149f30cd9b0f8d39ae6ad04d0c0b1c9762f17b92
@@ -152,7 +152,207 @@ cb4e3eb1a0d1   busybox:1.24   "sh"                    17 minutes ago   Exited (0
 234610d116a5   busybox:1.24   "echo 'Hello World'"    23 minutes ago   Exited (0) 23 minutes ago             vibrant_euler
 ```
 
-
+9. Inspecting docker container
+```
+D:\Development\LearnDocker>docker inspect 04bcfdd6cbf70b3cd550377cee8375867b3cf6aaa189606310b94619257ff7c3
+[
+    {
+        "Id": "04bcfdd6cbf70b3cd550377cee8375867b3cf6aaa189606310b94619257ff7c3",
+        "Created": "2021-03-02T16:30:58.0352782Z",
+        "Path": "sleep",
+        "Args": [
+            "1"
+        ],
+        "State": {
+            "Status": "exited",
+            "Running": false,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 0,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2021-03-02T16:30:58.5402746Z",
+            "FinishedAt": "2021-03-02T16:30:59.5445404Z"
+        },
+        "Image": "sha256:47bcc53f74dc94b1920f0b34f6036096526296767650f223433fe65c35f149eb",
+        "ResolvConfPath": "/var/lib/docker/containers/04bcfdd6cbf70b3cd550377cee8375867b3cf6aaa189606310b94619257ff7c3/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/04bcfdd6cbf70b3cd550377cee8375867b3cf6aaa189606310b94619257ff7c3/hostname",
+        "HostsPath": "/var/lib/docker/containers/04bcfdd6cbf70b3cd550377cee8375867b3cf6aaa189606310b94619257ff7c3/hosts",
+        "LogPath": "/var/lib/docker/containers/04bcfdd6cbf70b3cd550377cee8375867b3cf6aaa189606310b94619257ff7c3/04bcfdd6cbf70b3cd550377cee8375867b3cf6aaa189606310b94619257ff7c3-json.log",
+        "Name": "/sleep_1_box",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                30,
+                120
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/65a755b36d91202eb803da71cac912adb659e53bdfd5dd8d00d78d4de3d8db95-init/diff:/var/lib/docker/overlay2/074be92fda90b1614e26ef93191c26632558cadf05d1391bcb66379b33b4a607/diff:/var/lib/docker/overlay2/2e408f08658bb375b0b815b9117570e257a9e02886774415fd594666f545418c/diff",
+                "MergedDir": "/var/lib/docker/overlay2/65a755b36d91202eb803da71cac912adb659e53bdfd5dd8d00d78d4de3d8db95/merged",
+                "UpperDir": "/var/lib/docker/overlay2/65a755b36d91202eb803da71cac912adb659e53bdfd5dd8d00d78d4de3d8db95/diff",
+                "WorkDir": "/var/lib/docker/overlay2/65a755b36d91202eb803da71cac912adb659e53bdfd5dd8d00d78d4de3d8db95/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "04bcfdd6cbf7",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": null,
+            "Cmd": [
+                "sleep",
+                "1"
+            ],
+            "Image": "busybox:1.24",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "ec4d99bd7adc1f1b0cd5c91a1f26a2f7404c4723c307457eaa5d9c1885755b70",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {},
+            "SandboxKey": "/var/run/docker/netns/ec4d99bd7adc",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "33ac612d09c8a12a580cc15496adff6b6ad54319ec9bbe7764245ade329e0546",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+```
 
 
 
