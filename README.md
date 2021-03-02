@@ -31,5 +31,57 @@ Benefits over VMs:
 
 On Linux, the Docker client, Docker daemon run on the same host. Docker Daemon uses Linux specific kernel features. So, on Windows, Docker daemon runs inside a docker machine, which is a light weight Linux VM that runs on Windows.
 
+# Terminology
+1.**Images** are read-only templates used to create containers.
+  - They are created using the **docker build** command either ourselves or by other users.
+  - Images are stored in **Docker Registry**, like DockerHub.
+  - Instances of Images are **Containers**.
+2.Applications run on containers and all binaries needed for running an application are in Containers.
+3.Images are stored in Registries. This can be private or in DockerHub, the public registry.
+  - Inside a registry, Images are stored in repositories.
+  - A Docker repository is a collection of different version of docker images identified with the help of tags.
+4.DockerHub - set of public Docker Images that you can use. It is available at http://hub.docker.com/
+  - Official Images are well maintained by Docker company.
+  - There can be other images for the same application which are unofficial.
+
+# Commands
+Docker Images are downloaded to local box upon request. On subsequent requests, it is first searched in local box and then in remote docker registry.
+
+1. To find the list of docker images on local box, use the below command
+
+```
+D:\Development\LearnDocker>docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+```
+
+2. To spin up a Docker container, use the docker run command.
+
+```
+D:\Development\LearnDocker>docker run busybox:1.24 echo "Hello World"
+Unable to find image 'busybox:1.24' locally
+1.24: Pulling from library/busybox
+Image docker.io/library/busybox:1.24 uses outdated schema1 manifest format. Please upgrade to a schema2 image for better future compatibility. More information at https://docs.docker.com/registry/spec/deprecated-schema-v1/
+385e281300cc: Pull complete
+a3ed95caeb02: Pull complete
+Digest: sha256:8ea3273d79b47a8b6d018be398c17590a4b5ec604515f416c5b797db9dde3ad8
+Status: Downloaded newer image for busybox:1.24
+Hello World
+```
+The command says to create a container from the busybox docker image of version 1.24 and then run the echo command on top of it.
+```
+D:\Development\LearnDocker>docker run busybox:1.24 echo "Hello World!"
+Hello World!
+```
+Subsequent runs do not download the image from the central repository again and will be very fast.
+```
+D:\Development\LearnDocker>docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+busybox      1.24      47bcc53f74dc   4 years ago   1.11MB
+```
+Docker run would list this downloaded image when queried.
+
+Docker container can also be run in an interactive manner.
+
+
 
 
