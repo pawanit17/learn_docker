@@ -80,7 +80,20 @@ busybox      1.24      47bcc53f74dc   4 years ago   1.11MB
 ```
 Docker run would list this downloaded image when queried.
 
-Docker container can also be run in an interactive manner.
+Docker container can also be run in an interactive manner using the -i and -t commands.
+```
+D:\Development\LearnDocker>docker run -i -t busybox:1.24
+/ # echo Pavan
+Pavan
+/ # ls
+bin   dev   etc   home  proc  root  sys   tmp   usr   var
+/ #
+```
+
+It is interesting to note that any file created in one container are not persisted when that container is restarted.
+
+
+
 
 
 
