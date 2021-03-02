@@ -354,6 +354,57 @@ D:\Development\LearnDocker>docker inspect 04bcfdd6cbf70b3cd550377cee8375867b3cf6
 ]
 ```
 
+10. Docker port mapping - An application running on a certain port in a Docker image could be mapped to another port on the host using this command.
+Runs a Tomcat server on port 7777 ```docker run -it --rm -p 7777:8080 tomcat:8.0```
+Runs a Tomcat server on port 8888 ```docker run -it --rm -p 8888:8080 tomcat:8.0```
+
+# Docker Image Layers
+Each Image is made up of layers. And each of the layers in itself is an Image.
+Each of the layers add a certain aspect to realize the end goal of the image itself.
+
+To know what all layers make up an Image, you can use ```docker history tomcat:8.0```
+
+```
+D:\Development\LearnDocker>docker history tomcat:8.0
+IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT
+ef6a7c98d192   2 years ago   /bin/sh -c #(nop)  CMD ["catalina.sh" "run"]    0B
+<missing>      2 years ago   /bin/sh -c #(nop)  EXPOSE 8080/tcp              0B
+<missing>      2 years ago   /bin/sh -c set -e  && nativeLines="$(catalin…   0B
+<missing>      2 years ago   /bin/sh -c set -eux;   savedAptMark="$(apt-m…   17.7MB
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV TOMCAT_ASC_URLS=https…   0B
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV TOMCAT_TGZ_URLS=https…   0B
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV TOMCAT_SHA512=cd8a4e4…   0B
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV TOMCAT_VERSION=8.0.53    0B
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV TOMCAT_MAJOR=8           0B
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV GPG_KEYS=05AB33110949…   0B
+<missing>      2 years ago   /bin/sh -c apt-get update && apt-get install…   1.84MB
+<missing>      2 years ago   /bin/sh -c set -ex;  currentVersion="$(dpkg-…   7.34MB
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV OPENSSL_VERSION=1.1.0…   0B
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV LD_LIBRARY_PATH=/usr/…   0B
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV TOMCAT_NATIVE_LIBDIR=…   0B
+<missing>      2 years ago   /bin/sh -c #(nop) WORKDIR /usr/local/tomcat     0B
+<missing>      2 years ago   /bin/sh -c mkdir -p "$CATALINA_HOME"            0B
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV PATH=/usr/local/tomca…   0B
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV CATALINA_HOME=/usr/lo…   0B
+<missing>      2 years ago   /bin/sh -c set -ex;   if [ ! -d /usr/share/m…   159MB
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV JAVA_DEBIAN_VERSION=7…   0B
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV JAVA_VERSION=7u181       0B
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV JAVA_HOME=/docker-jav…   0B
+<missing>      2 years ago   /bin/sh -c ln -svT "/usr/lib/jvm/java-7-open…   33B
+<missing>      2 years ago   /bin/sh -c {   echo '#!/bin/sh';   echo 'set…   87B
+<missing>      2 years ago   /bin/sh -c #(nop)  ENV LANG=C.UTF-8             0B
+<missing>      2 years ago   /bin/sh -c apt-get update && apt-get install…   1.95MB
+<missing>      2 years ago   /bin/sh -c set -ex;  if ! command -v gpg > /…   0B
+<missing>      2 years ago   /bin/sh -c apt-get update && apt-get install…   41.1MB
+<missing>      2 years ago   /bin/sh -c #(nop)  CMD ["bash"]                 0B
+<missing>      2 years ago   /bin/sh -c #(nop) ADD file:8d73a09e59fe50289…   127MB
+```
+
+Each Image is read-only. When a container is created, it creates a new layer on top of the Image. This layer is a WRITABLE Layer.
+It is to this layer, the container specific data is written to. This means that 
+1. the data in this layer is removed as soon as the container is terminated.
+2. multiple containers of the same image will share the layers that make up the image ( read-only layers ).
+
 
 
 
