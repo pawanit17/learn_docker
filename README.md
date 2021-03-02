@@ -422,6 +422,7 @@ Dockerfile is a text document that contains all the instructions that are needed
 Each image will add a new layer.
 Naming: ```Dockerfile```
 
+Sample Dockerfile:
 ```
 FROM debian:stretch
 RUN apt-get update
@@ -454,7 +455,64 @@ D:\Development\LearnDocker>docker build -t pdittaka/debian .
  => => naming to docker.io/pdittaka/debian                                            0.0s
 ```
 
+Docker File:
+1. Each RUN instruction will create a new Image layer.
+2. So chain RUN instructions in a Docker Image file to reduce the number of layers it creates.
+Ex: Instead of this,
+```
+FROM debian:stretch
+RUN apt-get update
+RUN apt-get install -y git
+RUN apt-get install -y vim
+```
+do this:
+```
+FROM debian:stretch
+RUN apt-get update && apt-get install -y git && apt-get install -y vim
+```
+This prevents the number of layers that are created for the final Image.
+3. Sort the Dockerfile instructions appropriately so prevent unintentional duplication.
+4. CMD instructions specify what to run when the container starts up.
+5. Docker caches Image layers built using the same instructions.
+Ex:
+```
+D:\Development\LearnDocker>docker build -t pdittaka/debian .
+[+] Building 0.1s (8/8) FINISHED
+ => [internal] load build definition from Dockerfile                                  0.0s
+ => => transferring dockerfile: 31B                                                   0.0s
+ => [internal] load .dockerignore                                                     0.0s
+ => => transferring context: 2B                                                       0.0s
+ => [internal] load metadata for docker.io/library/debian:stretch                     0.0s
+ => [1/4] FROM docker.io/library/debian:stretch                                       0.0s
+ => CACHED [2/4] RUN apt-get update                                                   0.0s
+ => CACHED [3/4] RUN apt-get install -y git                                           0.0s
+ => CACHED [4/4] RUN apt-get install -y vim                                           0.0s
+ => exporting to image                                                                0.0s
+ => => exporting layers                                                               0.0s
+ => => writing image sha256:9cb49594e31a99842c1ed898eff5dce1f24345b3c57af252bd9025a3  0.0s
+ => => naming to docker.io/pdittaka/debian                                            0.0s
+```
+6. Cache can be disabled by using the ```--no-cache=true```
+```
+D:\Development\LearnDocker>docker build --no-cache=true -t pdittaka/debian .
+[+] Building 45.4s (8/8) FINISHED
+ => [internal] load build definition from Dockerfile                                                          0.0s
+ => => transferring dockerfile: 31B                                                                           0.0s
+ => [internal] load .dockerignore                                                                             0.0s
+ => => transferring context: 2B                                                                               0.0s
+ => [internal] load metadata for docker.io/library/debian:stretch                                             0.0s
+ => CACHED [1/4] FROM docker.io/library/debian:stretch                                                        0.0s
+ => [2/4] RUN apt-get update                                                                                  5.7s
+ => [3/4] RUN apt-get install -y git                                                                         30.2s
+ => [4/4] RUN apt-get install -y vim                                                                          8.5s
+ => exporting to image                                                                                        0.9s
+ => => exporting layers                                                                                       0.9s
+ => => writing image sha256:b43b59894c6beb5c046e0cf9d5c71014382f10ec2f3d548ca438edc0111b915b                  0.0s
+ => => naming to docker.io/pdittaka/debian                                                                    0.0s
+```
 
+7. COPY and ADD copies files to the container at a specific directory in the container.
+8. Docker images can be pushed onto the repositories on DockerHub for use by other developers as well.
 
 
 
