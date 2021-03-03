@@ -747,6 +747,7 @@ networks:
 - Read more on Docker swarm and Docker stack.
 - How is scaling done in a real world scenario?.
 - Where is kubernetes coming into play?.
+- Docker client, Docker daemon, Docker server, Docker host
 
 
 
