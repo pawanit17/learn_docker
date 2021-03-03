@@ -515,8 +515,25 @@ D:\Development\LearnDocker>docker build --no-cache=true -t pdittaka/debian .
 8. Docker images can be pushed onto the repositories on DockerHub for use by other developers as well.
 
 
+## Dockerizing a web application
 
+As an application, a Python web application can be dockerized easily. You just need to get a standard python installed docker image, install flask via pip, mark the working directory and run the .py file. The corresponding Dockerbuild file content is shown below:
 
+```
+FROM python:3.5
+RUN pip install Flask==0.11.1
+RUN useradd -ms /bin/bash admin
+USER admin
+WORKDIR /app
+COPY app /app
+CMD ["python", "app.py"] 
+```
+Image building: ```docker build -t dockerapp:v0.1 .```
+Check available Images: ```docker images```
+Run Docker in detached mode: ```docker run -d -p 5000:5000 IMAGE_ID```
+Check running Docker containers: ```docker ps```
+Running commands on the running containers: ```docker exec -it CONTAINER_ID bash```
+Opening ```http:\\localhost:5000``` on development machine.
 
 
 
