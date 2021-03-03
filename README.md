@@ -536,5 +536,28 @@ Running commands on the running containers: ```docker exec -it CONTAINER_ID bash
 Opening ```http:\\localhost:5000``` on development machine.
 
 
+## Docker Container Links
+Useful when one container needs to access or send information to the other container.
+No ports need to be exposed externally to the container.
+Useful for the world of Microservices.
+TODO?.
+
+## Docker Compose
+Manual linking of containers is impractical as our applications / number of containers increase.
+Docker Compose is a tool for defining and running multi-container Docker applications.
+A single configuration file docker-compose.yml is central.
+
+```
+D:\Development\LearnDocker\dockerapp>docker-compose version
+docker-compose version 1.27.4, build 40524192
+docker-py version: 4.3.1
+CPython version: 3.7.4
+OpenSSL version: OpenSSL 1.1.1c  28 May 2019
+```
+
+
+
+
+
 
 
