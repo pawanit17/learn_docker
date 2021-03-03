@@ -535,14 +535,13 @@ Check running Docker containers: ```docker ps```
 Running commands on the running containers: ```docker exec -it CONTAINER_ID bash```
 Opening ```http:\\localhost:5000``` on development machine.
 
-
-## Docker Container Links
+# Docker Container Links
 Useful when one container needs to access or send information to the other container.
 No ports need to be exposed externally to the container.
 Useful for the world of Microservices.
 TODO?.
 
-## Docker Compose
+# Docker Compose
 Manual linking of containers is impractical as our applications / number of containers increase.
 Docker Compose is a tool for defining and running multi-container Docker applications.
 A single configuration file docker-compose.yml is central.
@@ -554,6 +553,145 @@ docker-py version: 4.3.1
 CPython version: 3.7.4
 OpenSSL version: OpenSSL 1.1.1c  28 May 2019
 ```
+
+
+# Docker Networking
+Docker0 is the bridge network used by Docker for communications from the outside world, to talk to containers.
+Each container running on the docker host would connect to this Bridge.
+Using this Bridge network interface, containers can interact with each other or with outside world.
+
+```
+C:\Users\Pavan Dittakavi>docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+edbadc3e911b   bridge    bridge    local
+44301d5918a0   host      host      local
+dd1af6b326ba   none      null      local
+```
+## None Network
+No access to outside world, totally isolated.
+Useful for scenario where no network access is needed.
+
+```
+C:\Users\Pavan Dittakavi>docker run -d --net none busybox sleep 1000
+Unable to find image 'busybox:latest' locally
+latest: Pulling from library/busybox
+5c4213be9af9: Pull complete
+Digest: sha256:c6b45a95f932202dbb27c31333c4789f45184a744060f6e569cc9d2bf1b9ad6f
+Status: Downloaded newer image for busybox:latest
+66c60b26d4fe7bd3810ac101f6c26e5518591419c3ed939f852d38fd575bc98e
+
+C:\Users\Pavan Dittakavi>docker exec -it 66c60b26d4fe7bd3810ac101f6c26e5518591419c3ed939f852d38fd575bc98e /bin/ash
+/ # ping 8.8.8.8
+PING 8.8.8.8 (8.8.8.8): 56 data bytes
+ping: sendto: Network is unreachable
+/ # ifconfig
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+```
+## Bridge Network
+Default type of network in Docker.
+All the containers in the same Bridge network are connected to each other.
+They can connect to the outside world via the Bride network interface.
+By default, a docker container would have two network interfaces - bridge and none.
+```
+C:\Users\Pavan Dittakavi>docker exec -it container_1 ifconfig
+eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:02
+          inet addr:172.17.0.2  Bcast:172.17.255.255  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:11 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:906 (906.0 B)  TX bytes:0 (0.0 B)
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+          
+C:\Users\Pavan Dittakavi>docker run -d --name container_2 busybox sleep 1000
+5c3a3a6320cea6897be9e1c8dbf59b849b7b3648cc69b513d36c3cd618288b32
+
+C:\Users\Pavan Dittakavi>docker exec -it container_2 ifconfig
+eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:03
+          inet addr:172.17.0.3  Bcast:172.17.255.255  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:8 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:656 (656.0 B)  TX bytes:0 (0.0 B)
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+
+C:\Users\Pavan Dittakavi>docker exec -it container_1 ping 172.17.0.3
+PING 172.17.0.3 (172.17.0.3): 56 data bytes
+64 bytes from 172.17.0.3: seq=0 ttl=64 time=3.664 ms
+```
+As per need, a new bridge network can be created.
+```docker network create --driver bridge my_bridge_network```
+This creates a new bridge.
+You can create a new docker container with this new bridge network as follows:
+```docker run -d --name container_3 --net my_bridge_network busybox sleep 1000```
+Each bridge network is isolated from one another and so a ping from container_3 to container_1 does not resolve.
+To allow this:
+```doker network connect bridge container_3```
+This will add one more network interface to container_3 so that it can ping container_1 now.
+
+To disconnect this network interface, we can use the below command:
+```docker network disconnect bridge container_3```
+
+## Host Network
+In this configuration, all the network interfaces defined on the host machine are accessible to the container.
+These are called as open containers.
+
+```docker run -d --name container_4 --net host busybox sleep 1000```
+
+## Overlay Network
+In cases where a network has to be formed across hosts.
+
+Docker compose file is typically updated to point to different networks for different containers involved in a stack. This helps in network segregation.
+Ex:
+```
+version: '2'
+services:
+  proxy:
+    build: ./proxy
+    networks:
+      - front
+  app:
+    build: ./app
+    networks:
+      - front
+      - back
+   db:
+     image: postgres
+     networks:
+      - back
+
+networks:
+  front:
+    driver: custom-driver-1
+  back:
+    driver: custom-driver-2
+    driver_opts:
+      foo: "1"
+      bar: "2"
+```     
+
 
 
 
