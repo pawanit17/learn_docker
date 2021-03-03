@@ -539,13 +539,19 @@ Opening ```http:\\localhost:5000``` on development machine.
 Useful when one container needs to access or send information to the other container.
 No ports need to be exposed externally to the container.
 Useful for the world of Microservices.
-TODO?.
 
-# Docker Compose
+Ex:
+```docker run -d --name redis redis:3.2.0```
+```docker run -d -p 5000:5000 --link redis dockerapp:v0.3```
+
+## How linking works
+The etc/hosts file shall be updated with container name along with its ip address.
+That is why dockerapp is able to reach redis.
+
+## Docker Compose
 Manual linking of containers is impractical as our applications / number of containers increase.
 Docker Compose is a tool for defining and running multi-container Docker applications.
 A single configuration file docker-compose.yml is central.
-
 ```
 D:\Development\LearnDocker\dockerapp>docker-compose version
 docker-compose version 1.27.4, build 40524192
@@ -553,13 +559,52 @@ docker-py version: 4.3.1
 CPython version: 3.7.4
 OpenSSL version: OpenSSL 1.1.1c  28 May 2019
 ```
+## docker-compose.yml
+version: '3' // Version 3 format
+services:  // Services that make up our application
+  dockerapp:
+    build: . // path to the Dockerfile used to buid the image
+    ports:
+      - "5000":"5000" // host:container
+    depends_on:  // dependencies, if any
+      - redis
+  redis:
+    image: redis:3.2.0
+
+```docker-compose up``` will start all the services that make up the yml file and start the containers.
+
+## Docker compose workflow
+```docker-compose up -d``` runs in detached mode all the containers that are mentioned in the yml file.
+```docker-compose ps``` lists all the runnig containers.
+```docker-compose logs``` to see the logs for the containers
+```docker-compose logs -f``` to see the updated logs for the containers
+```docker0compose logs``` dockerapp to see the logs for a certain container.
+```docker-compose stop``` to stop the containers.
+```docker-compose rm``` to delete the containers.
+```docker-compose``` build to build a new image, especially when you want to update an existing image. 
+
 # Continous Integration
-The practice where code is built as soon as a commit is made is CI. This helps in ensuring that the bugs are identified before deployments.
+The practice where code is built as soon as a commit is made is CI. This helps in ensuring that the bugs are identified before production/staging deployments.
 With Docker way of working, typically as soon as the code is comitted, a new docker image is created with the application and pushed to docker registry.
 From that docker registry, it would be pulled and a container is spawned and run on staging/production servers.
 
-# Dockers in Production
+Ex: Github commit -> CircleCI -> DockerHub repository
 
+# Dockers in Production
+Most deployments use VMs and run containers on top of them.
+You can do a command line deployment onto a cloud provider like AWS or Digital Ocean.
+```docker-machine create --driver digitalocean --digitalocean-access-token <xxxxx> docker-app-machine```
+
+## Docker Swarm
+In real production scenario, there would be lots of containers that have to be run on lots of machines. Docker Swarm is used for this purpose.
+With Docker Swarm, a Manager Node delegates tasks to the Worker Nodes based on its scheduling.
+
+```docker swarm init``` is used to initialize a swarm. The docker engine targetted by this command becomes the manager in the newly created single-node swarm.
+```docker swarm join``` is used to join a swarm as a Swarm node.
+```docker swarm leave``` is used to leave a swarm joined earlier.
+
+## Docker Stack
+Group of interrelated services that share dependencies that can be scaled together.
 
 # Docker Networking
 Docker0 is the bridge network used by Docker for communications from the outside world, to talk to containers.
@@ -698,8 +743,10 @@ networks:
       bar: "2"
 ```     
 
-
-
+# Next steps
+- Read more on Docker swarm and Docker stack.
+- How is scaling done in a real world scenario?.
+- Where is kubernetes coming into play?.
 
 
 
