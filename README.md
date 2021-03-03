@@ -553,6 +553,12 @@ docker-py version: 4.3.1
 CPython version: 3.7.4
 OpenSSL version: OpenSSL 1.1.1c  28 May 2019
 ```
+# Continous Integration
+The practice where code is built as soon as a commit is made is CI. This helps in ensuring that the bugs are identified before deployments.
+With Docker way of working, typically as soon as the code is comitted, a new docker image is created with the application and pushed to docker registry.
+From that docker registry, it would be pulled and a container is spawned and run on staging/production servers.
+
+# Dockers in Production
 
 
 # Docker Networking
