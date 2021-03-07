@@ -6,6 +6,13 @@
 - Underlying OS can be upgraded/changed.
 - If you want to scale up, all you have to do is to spawn a new docker image.
 
+## Open Items
+- Docker MySQL Image and connect with an editor.
+- Docker NodeJS and build a REST API.
+- Custom Dockerfiles
+- Custom Docker-compose
+- Spawning an additional Docker container.
+
 # History
 Earlier, each machine only used to run a single application. 
 1.This is costly and also the CPU utilization is not efficient. 
