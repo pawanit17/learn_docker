@@ -1,3 +1,10 @@
+# What problem does Docker solve?.
+Removes compatibility problems: If Redis needs Java7 and RabbitMQ needs Java8, this is not a problem anymore.
+Standardizes the way components are made available for use: Using containers.
+Easier to set environments: Just pull relevant Docker containers.
+The same docker image can be containerized in different environments.
+Underlying OS can be upgraded/changed.
+
 # History
 Earlier, each machine only used to run a single application. 
 1.This is costly and also the CPU utilization is not efficient. 
