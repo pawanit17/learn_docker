@@ -448,9 +448,17 @@ Ex: Create an Ubuntu image with Java installed on it.
 ### Approach 2:
 Dockerfile is a text document that contains all the instructions that are needed to assemble the image.
 Each image will add a new layer.
-Naming: ```Dockerfile```
 
-Sample Dockerfile:
+Ex 1: Dockerfile
+```
+FROM ubuntu:latest
+MAINTAINER Pavan Dittakavi "pawan.it17@gmail.com"
+RUN apt-get update && apt-get install -y openjdk-8-jdk
+CMD ["/bin/bash"]
+```
+Command: docker image build -t pdittaka/ubuntu_java .
+
+Ex 2:
 ```
 FROM debian:stretch
 RUN apt-get update
