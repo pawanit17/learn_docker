@@ -460,6 +460,16 @@ Command: docker image build -t pdittaka/ubuntu_java .
 
 Ex 2:
 ```
+FROM ubuntu:latest
+MAINTAINER Pavan Dittakavi "pawan.it17@gmail.com"
+RUN apt-get update && apt-get install -y openjdk-8-jdk
+WORKDIR /usr/local/bin
+COPY test-program.jar .
+CMD ["java", "-jar", "test-program.jar"]
+```
+
+Ex 3:
+```
 FROM debian:stretch
 RUN apt-get update
 RUN apt-get install -y git
