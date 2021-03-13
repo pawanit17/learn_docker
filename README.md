@@ -425,11 +425,23 @@ You can build a new Docker Image using one of the two approaches:
 2. Use a Docker file.
 
 ### Approach 1:
+Using docker commit statement:
+
+Ex: Create a Debian image with Git installed on it.
 - Take a debian image:                      ```docker run -it debian:stretch```
 - Install git on it:                        ```apt-get update && apt-get install -y git```
 - Get the Container ID:                     ```docker ps -a```
 - Commit the docker container:              ```docker commit 7a72f6b4e077 pdittaka/debian:1.0.0```
 - Spin a new container from this new image: ```docker run -it pdittaka/debian```
+
+Ex: Create an Ubuntu image with Java installed on it.
+- docker pull ubuntu
+- docker container run -it ubuntu
+  - apt-get update
+  - apt-cache search jdk
+  - apt-get install -y openjdk-8-jdk
+  - docker commit -a "Pavan Dittakavi pawan.it17@gmail.com" 53e86a19fa3c
+  - docker container run -it ff7297152274
 
 ### Approach 2:
 Dockerfile is a text document that contains all the instructions that are needed to assemble the image.
