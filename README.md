@@ -1,6 +1,10 @@
 # What problem does Docker solve?.
-In a new project or an existing project where a new person joins, it is difficult to manage. There may be specific version of Tomcat to be installed with a specific version of JRE and a specific version of MySQL database. There could even be some environment variables that are set in the other developers machine which are forgotten to be communicated to the new developer. This problem happens all the while. This is what Docker is going to solve at its core.
+In a new project or an existing project where a new person joins, it is difficult to set up development environments - particularly if there are different components like message queues, databases, servers involved. 
+- There may be specific version of Tomcat to be installed with a specific version of JRE and a specific version of MySQL database.
+- There could even be some environment variables that are set in the other developers machine which are forgotten to be communicated to the new developer.
+- This problem happens all the while. This is what Docker is going to solve at its core.
 
+## Advantages
 - Removes compatibility problems: If Redis needs Java7 and RabbitMQ needs Java8, this is not a problem anymore.
 - Standardizes the way components are made available for use: Using containers.
 - Easier to set environments: Just pull relevant Docker containers.
