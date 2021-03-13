@@ -12,13 +12,6 @@ In a new project or an existing project where a new person joins, it is difficul
 - Underlying OS can be upgraded/changed.
 - If you want to scale up, all you have to do is to spawn a new docker image.
 
-## Open Items
-- Docker MySQL Image and connect with an editor.
-- Docker NodeJS and build a REST API.
-- Custom Dockerfiles
-- Custom Docker-compose
-- Spawning an additional Docker container.
-
 # History
 Earlier, each machine only used to run a single application. 
 1.This is costly and also the CPU utilization is not efficient. 
@@ -118,7 +111,7 @@ D:\Development\LearnDocker>docker run -d busybox:1.24 sleep 1000
 c492ba8abe689e909e8b4261149f30cd9b0f8d39ae6ad04d0c0b1c9762f17b92
 ```
 
-5. To see what all docker containers are running, you can use the **ps** command.
+5. To see what all docker containers are running, you can use the **ps** command. Note that ```docker conainer ls``` is the latest command.
 ```
 D:\Development\LearnDocker>docker ps
 CONTAINER ID   IMAGE          COMMAND         CREATED          STATUS          PORTS     NAMES
@@ -534,6 +527,9 @@ D:\Development\LearnDocker>docker build --no-cache=true -t pdittaka/debian .
 
 7. COPY and ADD copies files to the container at a specific directory in the container.
 8. Docker images can be pushed onto the repositories on DockerHub for use by other developers as well.
+   - docker login
+   - docker image push fleetman-webapp will fail because for all custom docker images, the user id is mandatory.
+   - docker image tag 05c dockerloginid/appname.
 
 
 ## Dockerizing a web application
@@ -549,12 +545,12 @@ WORKDIR /app
 COPY app /app
 CMD ["python", "app.py"] 
 ```
-Image building: ```docker build -t dockerapp:v0.1 .```
-Check available Images: ```docker images```
-Run Docker in detached mode: ```docker run -d -p 5000:5000 IMAGE_ID```
-Check running Docker containers: ```docker ps```
-Running commands on the running containers: ```docker exec -it CONTAINER_ID bash```
-Opening ```http:\\localhost:5000``` on development machine.
+- Image building: ```docker build -t dockerapp:v0.1 .```
+- Check available Images: ```docker images```
+- Run Docker in detached mode: ```docker run -d -p 5000:5000 IMAGE_ID```
+- Check running Docker containers: ```docker ps```
+- Running commands on the running containers: ```docker exec -it CONTAINER_ID bash```
+- Opening ```http:\\localhost:5000``` on development machine.
 
 # Docker Container Links
 Useful when one container needs to access or send information to the other container.
@@ -599,7 +595,7 @@ services:  // Services that make up our application
 ```docker-compose ps``` lists all the runnig containers.
 ```docker-compose logs``` to see the logs for the containers
 ```docker-compose logs -f``` to see the updated logs for the containers
-```docker0compose logs``` dockerapp to see the logs for a certain container.
+```docker-compose logs``` dockerapp to see the logs for a certain container.
 ```docker-compose stop``` to stop the containers.
 ```docker-compose rm``` to delete the containers.
 ```docker-compose``` build to build a new image, especially when you want to update an existing image. 
@@ -762,13 +758,24 @@ networks:
     driver_opts:
       foo: "1"
       bar: "2"
-```     
+```
 
 # Next steps
 - Read more on Docker swarm and Docker stack.
 - How is scaling done in a real world scenario?.
 - Where is kubernetes coming into play?.
 - Docker client, Docker daemon, Docker server, Docker host
+- Docker MySQL Image and connect with an editor.
+- Docker NodeJS and build a REST API.
+- Custom Dockerfiles
+- Custom Docker-compose
+- Spawning an additional Docker container.
+
+# Running Tomact on Docker container and expose on port 80
+
+- docker pull tomcat
+- docker run -it -p 80:8080 tomcat
+
 
 
 
