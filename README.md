@@ -443,6 +443,8 @@ Ex: Create an Ubuntu image with Java installed on it.
   - docker commit -a "Pavan Dittakavi pawan.it17@gmail.com" 53e86a19fa3c
   - docker container run -it ff7297152274
 
+**The downside of this approach to create new images is that the user of the image does not know what is inside that image. In the above example, how do I know what is in side that ubuntu java image apart from information in its name?.**
+
 ### Approach 2:
 Dockerfile is a text document that contains all the instructions that are needed to assemble the image.
 Each image will add a new layer.
