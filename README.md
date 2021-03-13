@@ -458,7 +458,10 @@ CMD ["/bin/bash"]
 ```
 Command: docker image build -t pdittaka/ubuntu_java .
 
-Ex 2:
+Ex 2: This example also covers how to deploy a jar file to the container and run it.
+- ENTRYPOINT and CMD are similar, except that CMD lets you override it via command line.
+- MAINTAINER is deprecated.
+- COPY and ADD are similar, although COPY is preferred.
 ```
 FROM ubuntu:latest
 MAINTAINER Pavan Dittakavi "pawan.it17@gmail.com"
