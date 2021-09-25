@@ -795,6 +795,11 @@ networks:
       bar: "2"
 ```
 
+# Volumes
+- Volumes are mounted locations on Containers to store persistent information.
+- They are needed as once the docker container terminates, it takes away all data that it generated.
+- So to view logs etc, Volumes are created for each container so that the data of interest that is stored in these Volumes persist even after the container is killed. 
+
 # Next steps
 - Read more on Docker swarm and Docker stack.
 - How is scaling done in a real world scenario?.
