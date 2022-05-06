@@ -817,6 +817,12 @@ networks:
 - docker run -it -p 80:8080 tomcat
 
 
+# Hands-on
+
+## Running a basic SpringBoot application inside Docker
+- Build a jar for the SpringBoot project that hosts REST API.
+- https://www.baeldung.com/dockerizing-spring-boot-application
+
 
 
 
