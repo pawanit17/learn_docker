@@ -849,7 +849,7 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 | docker stats 617bf86d4f32 | CPU/Memory usage for a specific container |
 | docker cp config.xml 617bf86d4f32:/tmp ![image](https://user-images.githubusercontent.com/42272776/167263395-3517f668-c9ed-4ab2-8b23-5d94fa3ef5fe.png) | Copies config.xml from the host to /tmp directory on the container specified |
 | docker cp 617bf86d4f32:/tmp/config.xml config_from_container.xml | Copies config.xml from the container /tmp directory to current host |
-| docker exec -it 617bf86d4f32 sh | Launches a shell onto the container |
+| docker exec -it 617bf86d4f32 sh ![image](https://user-images.githubusercontent.com/42272776/167263596-0fdaaefe-300c-4da1-abfe-5655780722f3.png) | Launches a shell onto the container |
 
 
 
