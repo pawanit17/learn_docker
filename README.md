@@ -834,8 +834,13 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 
 ## How to add more containers and put a load balancer ahead of them / application scaling
 
-
-## Mounts / Accessing shared/private/local file system
+## Docker Volumes
+- Used for persisting data.
+- Mapping of host folders to container folders.
+- ![image](https://user-images.githubusercontent.com/42272776/167266578-6c54617f-2c56-40f7-ba4c-40afe5fa480d.png)
+- docker run -v command is used to create volumes.
+- Docker compose can also be used to create volumes.
+- TODO - what is the example
 
 
 ## DB/Cache/WebServer as multiple containers
@@ -886,5 +891,8 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 | docker exec -it 617bf86d4f32 sh ![image](https://user-images.githubusercontent.com/42272776/167263596-0fdaaefe-300c-4da1-abfe-5655780722f3.png) | Launches a shell onto the container |
 
 
+
+## Docker Best Practices
+- https://www.youtube.com/watch?v=8vXoMqWgbQQ
 
 
