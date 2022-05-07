@@ -832,6 +832,37 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 - 3. Run the docker container from the image ```docker run -p 8888:5000 restapi:latest```
 - https://www.baeldung.com/dockerizing-spring-boot-application
 
+## How to add more containers and put a load balancer ahead of them / application scaling
+
+
+## Mounts / Accessing shared/private/local file system
+
+
+## DB/Cache/WebServer as multiple containers
+
+
+## How do two containers connect with each other?
+
+
+## What is Docker Compose?
+
+
+## What is Docker Swarm?
+
+
+## COPY vs ADD in Docker
+
+
+## CMD vs ENTRYPOINT in Docker
+
+
+## EXPOSE vs PUBLISH in Docker
+- EXPOSE is to let a port accessed by other containers - Inter Container Communication.
+- PUBLISH is to let the port be accessed outside the container, say from host machine.
+- If it is not EXPOSEd and PUBLISHed, then only that service is not accessible outside the container.
+- ![image](https://user-images.githubusercontent.com/42272776/167265398-6e891bcc-3393-4a19-9c93-9d80d6d6a7c4.png)
+- https://stackoverflow.com/a/22150099/3210526
+
 ## Commands
 
 | Command      | Description |
