@@ -831,6 +831,19 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 - 3. Run the docker container from the image ```docker run -p 8888:5000 restapi:latest```
 - https://www.baeldung.com/dockerizing-spring-boot-application
 
+## Commands
+
+| Command      | Description |
+| ----------- | ----------- |
+| docker build --tag=restapi:latest . | Builds a Docker image based off a Dockerfile |
+| docker run -p 8888:5000 restapi:latest | Runs a container for the Docker image | 
+| docker images     | Lists the images in local machine |
+| docker ps   | Lists the containers that are running |
+| docker stop 789fb42060e5 | Stops the container that is running, but does not delete it |
+| docker rm 789fb42060e5 | Removed the container specified |
+| docker rm -f 96f8fae6b216 | Stops and removes the specified container |
+| docker inspect 7568ed0eb3b5 | Inspects the running container |
+
 
 
 
