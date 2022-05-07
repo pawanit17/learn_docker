@@ -851,7 +851,9 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 
 
 ## COPY vs ADD in Docker
-
+- ADD does a little more than COPY. For instance, when a tar/zip file is copied using ADD, it extracts automatically the zipped contents to the destination.
+- So use COPY where ever possible and use ADD when explicitly needed.
+- https://stackoverflow.com/a/24958548/3210526
 
 ## CMD vs ENTRYPOINT in Docker
 
