@@ -822,7 +822,8 @@ networks:
 ## Running a basic SpringBoot application inside Docker
 - Build a jar for the SpringBoot project that hosts REST API.
 - 1. Create a docker image file
-```FROM openjdk:11
+```
+FROM openjdk:11
 MAINTAINER baeldung.com
 COPY target/docker-message-server-1.0.0.jar message-server-1.0.0.jar
 ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
@@ -837,12 +838,15 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 | ----------- | ----------- |
 | docker build --tag=restapi:latest . | Builds a Docker image based off a Dockerfile |
 | docker run -p 8888:5000 restapi:latest | Runs a container for the Docker image | 
+| docker run -d -p 8888:5000 restapi:latest | Runs a container for the Docker image in detached mode | 
 | docker images     | Lists the images in local machine |
 | docker ps   | Lists the containers that are running |
 | docker stop 789fb42060e5 | Stops the container that is running, but does not delete it |
 | docker rm 789fb42060e5 | Removed the container specified |
 | docker rm -f 96f8fae6b216 | Stops and removes the specified container |
-| docker inspect 7568ed0eb3b5 | Inspects the running container |
+| docker inspect 7568ed0eb3b5 | Inspects the running container. Content/Settings of the container come up as JSON text |
+| docker logs -f 7568ed0eb3b5 | The application logs as shown in terminal |
+![image](https://user-images.githubusercontent.com/42272776/167261055-4235655b-8f3a-4d4d-94b5-b71a7d5d6403.png)
 
 
 
