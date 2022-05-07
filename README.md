@@ -891,6 +891,9 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 | docker exec -it 617bf86d4f32 sh ![image](https://user-images.githubusercontent.com/42272776/167263596-0fdaaefe-300c-4da1-abfe-5655780722f3.png) | Launches a shell onto the container |
 
 
+More: https://www.tutorialspoint.com/docker/docker_quick_guide.htm
+
+
 
 ## Docker Best Practices
 - https://www.youtube.com/watch?v=8vXoMqWgbQQ
