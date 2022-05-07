@@ -856,6 +856,7 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 - https://stackoverflow.com/a/24958548/3210526
 
 ## CMD vs ENTRYPOINT in Docker
+- One of ENTRYPOINT or CMD should be present in a Dockerfile.
 - https://stackoverflow.com/a/39408777/3210526
 
 ## EXPOSE vs PUBLISH in Docker
