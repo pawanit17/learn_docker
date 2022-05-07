@@ -847,9 +847,14 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 
 
 ## How do two containers connect with each other?
-
+- https://www.tutorialspoint.com/docker/docker_networking.htm
+- https://www.tutorialspoint.com/docker/docker_container_linking.htm
 
 ## What is Docker Compose?
+- If there are multiple applications involved, like NGINX, MYSQL, starting them via individual dockerfiles may not be easy. It becomes more difficult as the number of components increase.
+- So a better way to manage this is via Docker Compose.
+- The intent is captured in an YML file.
+- TODO https://www.tutorialspoint.com/docker/docker_compose.htm
 
 
 ## What is Docker Swarm?
