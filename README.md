@@ -845,11 +845,9 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 | docker rm 789fb42060e5 | Removed the container specified |
 | docker rm -f 96f8fae6b216 | Stops and removes the specified container |
 | docker inspect 7568ed0eb3b5 | Inspects the running container. Content/Settings of the container come up as JSON text |
-| docker logs -f 7568ed0eb3b5 | The application logs as shown in terminal |
-![image](https://user-images.githubusercontent.com/42272776/167261055-4235655b-8f3a-4d4d-94b5-b71a7d5d6403.png)
+| docker logs -f 7568ed0eb3b5 ![image](https://user-images.githubusercontent.com/42272776/167261055-4235655b-8f3a-4d4d-94b5-b71a7d5d6403.png) | The application logs as shown in terminal |
 | docker stats 617bf86d4f32 | CPU/Memory usage for a specific container |
-| docker cp config.xml 617bf86d4f32:/tmp | Copies config.xml from the host to /tmp directory on the container specified |
-![image](https://user-images.githubusercontent.com/42272776/167263395-3517f668-c9ed-4ab2-8b23-5d94fa3ef5fe.png)
+| docker cp config.xml 617bf86d4f32:/tmp ![image](https://user-images.githubusercontent.com/42272776/167263395-3517f668-c9ed-4ab2-8b23-5d94fa3ef5fe.png) | Copies config.xml from the host to /tmp directory on the container specified |
 | docker cp 617bf86d4f32:/tmp/config.xml config_from_container.xml | Copies config.xml from the container /tmp directory to current host |
 | docker exec -it 617bf86d4f32 sh | Launches a shell onto the container |
 
