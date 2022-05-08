@@ -860,16 +860,16 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 ## What is Docker Swarm?
 
 
-## COPY vs ADD in Docker
+## COPY vs ADD in Dockerfile
 - ADD does a little more than COPY. For instance, when a tar/zip file is copied using ADD, it extracts automatically the zipped contents to the destination.
 - So use COPY where ever possible and use ADD when explicitly needed.
 - https://stackoverflow.com/a/24958548/3210526
 
-## CMD vs ENTRYPOINT in Docker
+## CMD vs ENTRYPOINT in Dockerfile
 - One of ENTRYPOINT or CMD should be present in a Dockerfile.
 - https://stackoverflow.com/a/39408777/3210526
 
-## EXPOSE vs PUBLISH in Docker
+## EXPOSE vs PUBLISH in Dockerfile
 - EXPOSE is to let a port accessed by other containers - Inter Container Communication.
 - PUBLISH is to let the port be accessed outside the container, say from host machine.
 - If it is not EXPOSEd and PUBLISHed, then only that service is not accessible outside the container.
