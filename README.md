@@ -834,6 +834,23 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 
 ## How to set environment variables in docker
 
+## COPY vs ADD in Dockerfile
+- ADD does a little more than COPY. For instance, when a tar/zip file is copied using ADD, it extracts automatically the zipped contents to the destination.
+- So use COPY where ever possible and use ADD when explicitly needed.
+- https://stackoverflow.com/a/24958548/3210526
+
+## CMD vs ENTRYPOINT in Dockerfile
+- One of ENTRYPOINT or CMD should be present in a Dockerfile.
+- https://stackoverflow.com/a/39408777/3210526
+
+## EXPOSE vs PUBLISH in Dockerfile
+- EXPOSE is to let a port accessed by other containers - Inter Container Communication.
+- PUBLISH is to let the port be accessed outside the container, say from host machine.
+- If it is not EXPOSEd and PUBLISHed, then only that service is not accessible outside the container.
+- ![image](https://user-images.githubusercontent.com/42272776/167265398-6e891bcc-3393-4a19-9c93-9d80d6d6a7c4.png)
+- https://stackoverflow.com/a/22150099/3210526
+
+
 ## How to add more containers and put a load balancer ahead of them / application scaling
 
 ## Docker Network
@@ -851,9 +868,10 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 ```
 - This scheme however lets containers access each other using their IP Address only. And since IP Addresses can change, this scheme is not robust.
 - A better way is to create a network and join those containers that need access to this network & lets the containers access each other via their names.
-- This is user-defined-newtwork.
+- This is user-defined-network.
 - Content is very well covered here: https://www.tutorialworks.com/container-networking/
-- 
+- User Defined Bridge Network
+  -  
 
 ## How do two containers connect with each other?
 - https://www.tutorialspoint.com/docker/docker_networking.htm
@@ -868,12 +886,6 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 - Docker compose can also be used to create volumes.
 - TODO - what is the example
 
-
-
-## DB/Cache/WebServer as multiple containers
-
-
-
 ## What is Docker Compose?
 - If there are multiple applications involved, like NGINX, MYSQL, starting them via individual dockerfiles may not be easy. It becomes more difficult as the number of components increase.
 - So a better way to manage this is via Docker Compose.
@@ -884,21 +896,7 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 ## What is Docker Swarm?
 
 
-## COPY vs ADD in Dockerfile
-- ADD does a little more than COPY. For instance, when a tar/zip file is copied using ADD, it extracts automatically the zipped contents to the destination.
-- So use COPY where ever possible and use ADD when explicitly needed.
-- https://stackoverflow.com/a/24958548/3210526
 
-## CMD vs ENTRYPOINT in Dockerfile
-- One of ENTRYPOINT or CMD should be present in a Dockerfile.
-- https://stackoverflow.com/a/39408777/3210526
-
-## EXPOSE vs PUBLISH in Dockerfile
-- EXPOSE is to let a port accessed by other containers - Inter Container Communication.
-- PUBLISH is to let the port be accessed outside the container, say from host machine.
-- If it is not EXPOSEd and PUBLISHed, then only that service is not accessible outside the container.
-- ![image](https://user-images.githubusercontent.com/42272776/167265398-6e891bcc-3393-4a19-9c93-9d80d6d6a7c4.png)
-- https://stackoverflow.com/a/22150099/3210526
 
 ## Commands
 
