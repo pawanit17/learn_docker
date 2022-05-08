@@ -834,6 +834,10 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 
 ## How to set environment variables in docker
 
+## How to set name of the Docker container 
+- docker run --name consumer -d -p 8000:5000 consumer:latest
+- The name should be after the run command.
+
 ## COPY vs ADD in Dockerfile
 - ADD does a little more than COPY. For instance, when a tar/zip file is copied using ADD, it extracts automatically the zipped contents to the destination.
 - So use COPY where ever possible and use ADD when explicitly needed.
@@ -849,7 +853,6 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 - If it is not EXPOSEd and PUBLISHed, then only that service is not accessible outside the container.
 - ![image](https://user-images.githubusercontent.com/42272776/167265398-6e891bcc-3393-4a19-9c93-9d80d6d6a7c4.png)
 - https://stackoverflow.com/a/22150099/3210526
-
 
 ## How to add more containers and put a load balancer ahead of them / application scaling
 
@@ -930,8 +933,9 @@ java.net.UnknownHostException: producer
     }
   ]
   ```
-  - With this change, an endpoint like http:\\producer:5001 gets resolved from the consumer application.
+  - With this change, an endpoint like http://producer:5001 gets resolved from the consumer application.
   - ![image](https://user-images.githubusercontent.com/42272776/167292855-d3edf90e-2fc7-483e-8dbb-63f5c9db9c78.png)
+  - ![image](https://user-images.githubusercontent.com/42272776/167292938-f6e20c02-d62d-4645-885f-9e7dcbfba632.png)
 
 
 ## How do two containers connect with each other?
@@ -955,7 +959,6 @@ java.net.UnknownHostException: producer
 
 
 ## What is Docker Swarm?
-
 
 
 
