@@ -937,11 +937,9 @@ java.net.UnknownHostException: producer
   - ![image](https://user-images.githubusercontent.com/42272776/167292855-d3edf90e-2fc7-483e-8dbb-63f5c9db9c78.png)
   - ![image](https://user-images.githubusercontent.com/42272776/167292938-f6e20c02-d62d-4645-885f-9e7dcbfba632.png)
 
-
 ## How do two containers connect with each other?
 - https://www.tutorialspoint.com/docker/docker_networking.htm
 - https://www.tutorialspoint.com/docker/docker_container_linking.htm
-
 
 ## Docker Volumes
 - Used for persisting data.
@@ -955,12 +953,27 @@ java.net.UnknownHostException: producer
 - If there are multiple applications involved, like NGINX, MYSQL, starting them via individual dockerfiles may not be easy. It becomes more difficult as the number of components increase.
 - So a better way to manage this is via Docker Compose.
 - The intent is captured in an YML file.
-- TODO https://www.tutorialspoint.com/docker/docker_compose.htm
-
+- Example, to launch the container of Producer via docker-compose, we would have the following file
+```
+version: '2'
+services:
+    producer-service:
+        container_name: producer
+        build:
+            context: Producer
+            dockerfile: Dockerfile
+        image: producer:latest
+        ports:
+            - 7000:5001
+        networks:
+            - spring-cloud-network
+networks:
+    spring-cloud-network:
+        driver: bridge
+```
+- docker-compose up -d
 
 ## What is Docker Swarm?
-
-
 
 ## Commands
 
@@ -980,7 +993,10 @@ java.net.UnknownHostException: producer
 | docker cp config.xml 617bf86d4f32:/tmp ![image](https://user-images.githubusercontent.com/42272776/167263395-3517f668-c9ed-4ab2-8b23-5d94fa3ef5fe.png) | Copies config.xml from the host to /tmp directory on the container specified |
 | docker cp 617bf86d4f32:/tmp/config.xml config_from_container.xml | Copies config.xml from the container /tmp directory to current host |
 | docker exec -it 617bf86d4f32 sh ![image](https://user-images.githubusercontent.com/42272776/167263596-0fdaaefe-300c-4da1-abfe-5655780722f3.png) | Launches a shell onto the container |
-
+| docker network create prod-cons-network | Create a docker network with the given name |
+| docker network connect prod-cons-network producer | Add a container called Producer to the docker network created |
+| docker network inspect prod-cons-network | Inspect the network to see what all containers are registered to it |
+| docker-compose up -d | Launch services/containers from docker compose |
 
 More: https://www.tutorialspoint.com/docker/docker_quick_guide.htm
 
