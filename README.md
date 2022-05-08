@@ -867,6 +867,12 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
         }
 ```
 - This scheme however lets containers access each other using their IP Address only. And since IP Addresses can change, this scheme is not robust.
+```
+2022-05-08 09:15:51.841  INFO 1 --- [nio-5000-exec-4] i.f.r.controller.WelcomeController       : User 'favicon.ico' visited the page!.
+2022-05-08 09:15:51.845 ERROR 1 --- [nio-5000-exec-4] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://producer:5001/": producer; nested exception is java.net.UnknownHostException: producer] with root cause
+
+java.net.UnknownHostException: producer
+```
 - A better way is to create a network and join those containers that need access to this network & lets the containers access each other via their names.
 - This is user-defined-network.
 - Content is very well covered here: https://www.tutorialworks.com/container-networking/
