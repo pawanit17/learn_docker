@@ -996,7 +996,7 @@ networks:
 | docker network create prod-cons-network | Create a docker network with the given name |
 | docker network connect prod-cons-network producer | Add a container called Producer to the docker network created |
 | docker network inspect prod-cons-network | Inspect the network to see what all containers are registered to it |
-| docker-compose up -d | Launch services/containers from docker compose |
+| docker-compose up -d | Launch services/containers from docker compose in detached mode |
 
 More: https://www.tutorialspoint.com/docker/docker_quick_guide.htm
 
