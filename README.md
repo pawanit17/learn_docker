@@ -874,10 +874,65 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 java.net.UnknownHostException: producer
 ```
 - A better way is to create a network and join those containers that need access to this network & lets the containers access each other via their names.
+![image](https://user-images.githubusercontent.com/42272776/167291950-92a1570e-407f-4ca7-a3f3-e3e6edbdf02e.png)
 - This is user-defined-network.
 - Content is very well covered here: https://www.tutorialworks.com/container-networking/
 - User Defined Bridge Network
-  -  
+  -  docker network create prod-cons-network
+  -  docker network connect prod-cons-network producer
+  -  docker network connect prod-cons-network consumer
+  -  docker network inspect prod-cons-network
+  ```
+  D:\Development\AWS\restapi\inter-container-communication\Producer>docker network inspect prod-cons-network
+  [
+    {
+        "Name": "prod-cons-network",
+        "Id": "ab9df81ede19dee1d979b9b68a5750aa3149d7a91f95a11d7e9edb802cbd438a",
+        "Created": "2022-05-08T10:28:04.0584659Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.19.0.0/16",
+                    "Gateway": "172.19.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "68994f667967bd23455d4f25c4fa1a72e4b5b17092e2f12b024353f03132b1bb": {
+                "Name": "producer",
+                "EndpointID": "0bc875a1300b195e832a17aeca2b9ef418e92e0f97d4b269a4167b8408155c68",
+                "MacAddress": "02:42:ac:13:00:02",
+                "IPv4Address": "172.19.0.2/16",
+                "IPv6Address": ""
+            },
+            "d98fd9a67a888970efee6710a534e8df9bc2921169d3b222125b1f5261ca61d3": {
+                "Name": "consumer",
+                "EndpointID": "35b9b22346df510f08c87318896e11ef8a689cafedc5bcd0cfb854218c4c6501",
+                "MacAddress": "02:42:ac:13:00:03",
+                "IPv4Address": "172.19.0.3/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+  ]
+  ```
+  - With this change, an endpoint like http:\\producer:5001 gets resolved from the consumer application.
+  - ![image](https://user-images.githubusercontent.com/42272776/167292855-d3edf90e-2fc7-483e-8dbb-63f5c9db9c78.png)
+
 
 ## How do two containers connect with each other?
 - https://www.tutorialspoint.com/docker/docker_networking.htm
