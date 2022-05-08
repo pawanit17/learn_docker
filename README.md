@@ -832,6 +832,8 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 - 3. Run the docker container from the image ```docker run -p 8888:5000 restapi:latest```
 - https://www.baeldung.com/dockerizing-spring-boot-application
 
+## How to set environment variables in docker
+
 ## How to add more containers and put a load balancer ahead of them / application scaling
 
 ## Docker Volumes
