@@ -971,7 +971,59 @@ networks:
     spring-cloud-network:
         driver: bridge
 ```
-- docker-compose up -d
+- docker-compose up -d and docker-compose down brings up the services and removes them respectively.
+- Docker compose file to launch the Producer and the Consumer!.
+```
+version: '2'
+services:
+    producer-service:
+        container_name: producer
+        build:
+            context: Producer
+            dockerfile: Dockerfile
+        image: producer:latest
+        ports:
+            - 7000:5001
+        networks:
+            - spring-cloud-network
+    consumer-service:
+        container_name: consumer
+        build:
+            context: Consumer
+            dockerfile: Dockerfile
+        image: consumer:latest
+        ports:
+            - 8000:5000
+        networks:
+            - spring-cloud-network
+networks:
+    spring-cloud-network:
+        driver: bridge
+ ```
+
+## Docker Compose - Spawn More Containers / Scale up
+- To scale up, we have to remove the name from the docker-compose.yml file.
+```
+version: '2'
+services:
+    producer-service:
+        build:
+            context: Producer
+            dockerfile: Dockerfile
+        image: producer:latest
+        ports:
+            - 9000-9005:5001
+        networks:
+            - spring-cloud-network
+networks:
+    spring-cloud-network:
+        driver: bridge
+```
+- We use the below command to scale up the instances.
+  - docker-compose up -d --build --scale producer-service=3
+  - ![image](https://user-images.githubusercontent.com/42272776/167307288-29d6ac75-a6ad-441d-adb5-f40e6008ce0c.png)
+TODO: What is the error you are getting with services/containers going down?.
+
 
 ## What is Docker Swarm?
 
@@ -997,6 +1049,8 @@ networks:
 | docker network connect prod-cons-network producer | Add a container called Producer to the docker network created |
 | docker network inspect prod-cons-network | Inspect the network to see what all containers are registered to it |
 | docker-compose up -d | Launch services/containers from docker compose in detached mode |
+| docker-compose down | Terminates the containers and the networks created |
+
 
 More: https://www.tutorialspoint.com/docker/docker_quick_guide.htm
 
