@@ -836,6 +836,30 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 
 ## How to add more containers and put a load balancer ahead of them / application scaling
 
+## Docker Network
+- All containers that start on the same docker host would get added to the default bridge network.
+```
+"Containers": {
+            "2f10b3507a772d6d61a3863cd604cda1a2544e555ec9fca1e2c69d975bad63e6": {
+                "Name": "crazy_almeida",
+                "EndpointID": "3a8e084a5187608a722be2210ef65b9a4c27af3c9ff16b97d26841a5c86dc1ec",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            }
+        }
+```
+- This scheme however lets containers access each other using their IP Address only. And since IP Addresses can change, this scheme is not robust.
+- A better way is to create a network and join those containers that need access to this network & lets the containers access each other via their names.
+- This is user-defined-newtwork.
+- Content is very well covered here: https://www.tutorialworks.com/container-networking/
+- 
+
+## How do two containers connect with each other?
+- https://www.tutorialspoint.com/docker/docker_networking.htm
+- https://www.tutorialspoint.com/docker/docker_container_linking.htm
+
+
 ## Docker Volumes
 - Used for persisting data.
 - Mapping of host folders to container folders.
@@ -845,14 +869,10 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 - TODO - what is the example
 
 
-# Docker Network
 
 ## DB/Cache/WebServer as multiple containers
 
 
-## How do two containers connect with each other?
-- https://www.tutorialspoint.com/docker/docker_networking.htm
-- https://www.tutorialspoint.com/docker/docker_container_linking.htm
 
 ## What is Docker Compose?
 - If there are multiple applications involved, like NGINX, MYSQL, starting them via individual dockerfiles may not be easy. It becomes more difficult as the number of components increase.
