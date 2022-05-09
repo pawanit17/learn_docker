@@ -833,6 +833,18 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 - A very good article on the overall process https://www.baeldung.com/dockerizing-spring-boot-application
 
 ## How to set environment variables in docker
+```
+FROM openjdk:11
+MAINTAINER pavan dittakavi
+ENV TC_ROOT=DTceprd
+COPY restapi-0.0.1-SNAPSHOT.jar consumer-2.0.0.jar
+ENTRYPOINT ["java","-jar","/consumer-2.0.0.jar"]
+```
+- The ENV command sets the environment variable onto a Docker container.
+- ENV is a little different from ARG.
+- ARG make environment variable only available during the build process.
+- ENV makes it available during the container execution time too.
+- ![image](https://user-images.githubusercontent.com/42272776/167460614-e895bb02-9e85-4402-9677-e4f36f969137.png)
 
 ## How to set name of the Docker container 
 - docker run --name consumer -d -p 8000:5000 consumer:latest
@@ -853,6 +865,8 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 - If it is not EXPOSEd and PUBLISHed, then only that service is not accessible outside the container.
 - ![image](https://user-images.githubusercontent.com/42272776/167265398-6e891bcc-3393-4a19-9c93-9d80d6d6a7c4.png)
 - https://stackoverflow.com/a/22150099/3210526
+
+## How to configure a custom Docker registry / local Docker registry?.
 
 ## How to add more containers and put a load balancer ahead of them / application scaling
 
