@@ -830,7 +830,7 @@ ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 ```
 - 2. Build a docker image from the dockerfile ```docker build --tag=restapi:latest .```
 - 3. Run the docker container from the image ```docker run -p 8888:5000 restapi:latest```
-- https://www.baeldung.com/dockerizing-spring-boot-application
+- A very good article on the overall process https://www.baeldung.com/dockerizing-spring-boot-application
 
 ## How to set environment variables in docker
 
