@@ -866,9 +866,8 @@ ENTRYPOINT ["java","-jar","/consumer-2.0.0.jar"]
 - ![image](https://user-images.githubusercontent.com/42272776/167265398-6e891bcc-3393-4a19-9c93-9d80d6d6a7c4.png)
 - https://stackoverflow.com/a/22150099/3210526
 
-## How to configure a custom Docker registry / local Docker registry?.
-
 ## How to add more containers and put a load balancer ahead of them / application scaling
+- This is done in Kubernetes via Services.
 
 ## Docker Network
 - All containers that start on the same docker host would get added to the default bridge network.
@@ -1068,7 +1067,10 @@ TODO: What is the error you are getting with services/containers going down?.
 
 More: https://www.tutorialspoint.com/docker/docker_quick_guide.htm
 
-
+## TODO
+- How to configure a custom Docker registry / local Docker registry?.
+- How to push an image to docker hub?.
+- How to build a CI/CD pipeline with Docker involved?.
 
 ## Docker Best Practices
 - https://www.youtube.com/watch?v=8vXoMqWgbQQ
