@@ -1064,7 +1064,8 @@ TODO: What is the error you are getting with services/containers going down?.
 | docker-compose up -d | Launch services/containers from docker compose in detached mode |
 | docker-compose down | Terminates the containers and the networks created |
 | docker login | To login to Dockerhub website |
-| docker push pawanit17/restapi_containerized | To push an image to DockerHub |
+| docker push pawanit17/restapi_containerized | To push an image to DockerHub ![image](https://user-images.githubusercontent.com/42272776/168883052-f52f529a-5c9d-4269-9a95-03eb8ef52106.png)
+ |
 
 More: https://www.tutorialspoint.com/docker/docker_quick_guide.htm
 
