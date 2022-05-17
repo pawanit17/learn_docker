@@ -1071,7 +1071,7 @@ More: https://www.tutorialspoint.com/docker/docker_quick_guide.htm
 
 ## TODO
 - How to configure a custom Docker registry / local Docker registry?.
-- How to push an image to docker hub?.
+- How are docker images versioned?.
 - How to build a CI/CD pipeline with Docker involved?.
 
 ## Docker Best Practices
