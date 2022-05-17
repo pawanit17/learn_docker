@@ -1063,7 +1063,8 @@ TODO: What is the error you are getting with services/containers going down?.
 | docker network inspect prod-cons-network | Inspect the network to see what all containers are registered to it |
 | docker-compose up -d | Launch services/containers from docker compose in detached mode |
 | docker-compose down | Terminates the containers and the networks created |
-
+| docker login | To login to Dockerhub website |
+| docker push pawanit17/restapi_containerized | To push an image to DockerHub |
 
 More: https://www.tutorialspoint.com/docker/docker_quick_guide.htm
 
