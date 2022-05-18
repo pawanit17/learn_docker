@@ -1073,6 +1073,7 @@ More: https://www.tutorialspoint.com/docker/docker_quick_guide.htm
 - How to configure a custom Docker registry / local Docker registry?.
 - How are docker images versioned?.
 - How to build a CI/CD pipeline with Docker involved?.
+- Deploy a container in a Kubernetes pod?.
 
 ## Docker Best Practices
 - https://www.youtube.com/watch?v=8vXoMqWgbQQ
