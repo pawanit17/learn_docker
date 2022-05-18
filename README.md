@@ -1074,6 +1074,9 @@ More: https://www.tutorialspoint.com/docker/docker_quick_guide.htm
 - How are docker images versioned?.
 - How to build a CI/CD pipeline with Docker involved?.
 - Deploy a container in a Kubernetes pod?.
+- Versioning an image as LATEST
+  - This is not a good practice to have the images marked as LATEST.
+  - The reasons are that 1. Kubernetes automatically pulls images marked as LATEST. So if a new content is pushed and marked as LATEST, then Kubernetes would end up pulling altogether different version of source code. 2. Docker does not keep LATEST up-to-date. If a new version of the image is available, it is not automatically marked as LATEST. 
 
 ## Docker Best Practices
 - https://www.youtube.com/watch?v=8vXoMqWgbQQ
