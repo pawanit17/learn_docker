@@ -1077,7 +1077,25 @@ More: https://www.tutorialspoint.com/docker/docker_quick_guide.htm
 - Deploy a container in a Kubernetes pod?.
 - Versioning an image as LATEST
   - This is not a good practice to have the images marked as LATEST.
-  - The reasons are that 1. Kubernetes automatically pulls images marked as LATEST. So if a new content is pushed and marked as LATEST, then Kubernetes would end up pulling altogether different version of source code. 2. Docker does not keep LATEST up-to-date. If a new version of the image is available, it is not automatically marked as LATEST.
+  - The reasons are that
+    - 1. Kubernetes automatically pulls images marked as LATEST. So if a new content is pushed and marked as LATEST, then Kubernetes would end up pulling altogether different version of source code.
+    - 2. Docker does not keep LATEST up-to-date. If a new version of the image is available, it is not automatically marked as LATEST.
+  -  To tag an image as LATEST, we pick the version of our interest using ```docker images``` command.
+     -  ```REPOSITORY                               TAG            IMAGE ID       CREATED         SIZE
+        latest                                   latest         34a94be1c5d8   24 hours ago    677MB
+        pawanit17/movieservice                   v2.x           34a94be1c5d8   24 hours ago    677MB
+        pawanit17/movieservice                   v1.x           02645d424af7   24 hours ago    677MB
+        restapi_containerized                    latest         3a66becc4797   2 days ago      677MB
+        pawanit17/movieservice                   latest         3a66becc4797   2 days ago      677MB
+        pawanit17/movieservice                   v1.0           3a66becc4797   2 days ago      677MB
+        pawanit17/movieservice                   v2.0           3a66becc4797   2 days ago      677MB
+        pawanit17/movieservice                   v3.0           3a66becc4797   2 days ago      677MB
+        pawanit17/restapi_containerized          latest         3a66becc4797   2 days ago      677MB```
+  -  Then we tag the specific version/tag of the image as latest using the below command.
+  -  ```docker tag 3a66becc4797 pawanit17/movieservice:latest```
+  -  We then push this change to the DockerHub!.
+  -  docker push pawanit17/movieservice:latest
+  -  ![image](https://user-images.githubusercontent.com/42272776/169361134-6aa6ecd9-0c8a-4d2a-95c3-30dd1657d705.png)
   -  https://stackoverflow.com/a/48595173/815961
 
 ## Docker Best Practices
